@@ -2,6 +2,6 @@
 ref: java
 name: java
 description: Manage JAVA on centOS using SSH
-version: 1
+version: 0.1.0
 author: Yugendra
 email: yugendra.mail@gmail.com
