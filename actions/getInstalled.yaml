@@ -1,0 +1,18 @@
+---
+name: get_installed
+pack: java
+runner_type: run-python
+description: Get all previously installed JAVA versions
+enabled: true
+entry_point: getInstalled.py
+parameters:
+  host:
+    type: string
+    description: Target server IP
+  username:
+    type: string
+    description: login username
+  password:
+    type: string
+    description: login password
+    secret: true

@@ -1,0 +1,27 @@
+version: '2.0'
+name: java.install-java
+description: Install JAVA on CentOS.
+
+workflows:
+    main:
+        description: Install JAVA on CentOS.
+        type: direct
+        tasks:
+            get_java_version:
+                action: java.get_installed
+                input:
+                    host: 192.168.137.104
+                    username: root
+                    password: devops123
+                publish:
+                    versions: <% task(get_java_version).result.result %>
+                on-success:
+                    - install_java
+            install_java:
+                action: java.install
+                input:
+                    host: 192.168.137.104
+                    username: root
+                    password: devops123
+                    installed_versions: <% $.versions %>
+                    required_version: "java-1.8.0"
