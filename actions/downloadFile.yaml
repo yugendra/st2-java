@@ -1,0 +1,24 @@
+---
+name: download_file
+pack: java
+runner_type: run-python
+description: Download file on remote server
+enabled: true
+entry_point: downloadFile.py
+parameters:
+    host:
+        type: string
+        description: Target server IP
+    username:
+        type: string
+        description: login username
+    password:
+        type: string
+        description: login password
+        secret: true
+    downloadURL:
+        type: string
+        description: File location to download
+    downloadPath:
+        type: string
+        description: Path where file should download

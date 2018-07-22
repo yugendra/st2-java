@@ -25,3 +25,13 @@ workflows:
                     password: devops123
                     installed_versions: <% $.versions %>
                     required_version: "java-1.8.0"
+                on-success:
+                    - download_file
+            download_file:
+                action: java.download_file
+                input:
+                    host: 192.168.137.104
+                    username: root
+                    password: devops123
+                    downloadURL: https://raw.githubusercontent.com/yugendra/st2-java/master/requirements.txt
+                    downloadPath: /tmp/

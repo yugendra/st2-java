@@ -11,6 +11,9 @@ class installJava(Action):
         self.installed_versions = installed_versions
         self.required_version = required_version
         
+        if self._isReqVerInstalled():
+            return(True, "JAVA is already at required version")
+        
         exit_status, stderr = self._remove_older()
         if exit_status != 0:
             return(False, stderr)
@@ -43,3 +46,8 @@ class installJava(Action):
                 return exit_status, stderr
         return 0, None
         
+    def _isReqVerInstalled(self):
+        if self.required_version in self.installed_versions[0]:
+            return True
+        else:
+            return False
