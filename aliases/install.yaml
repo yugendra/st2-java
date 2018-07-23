@@ -1,0 +1,8 @@
+---
+name: "install_java"
+action_ref: "java.install-java"
+description: "Install Java on remote server"
+formats:
+    - display: "install java on <username>:<password>@<host>"
+      representation:
+        - "install java on {{ username}}:{{ password }}@{{ host }}"

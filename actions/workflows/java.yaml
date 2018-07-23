@@ -6,13 +6,18 @@ workflows:
     main:
         description: Install JAVA on CentOS.
         type: direct
+        input:
+            - host
+            - username
+            - password
+            
         tasks:
             get_java_version:
                 action: java.get_installed
                 input:
-                    host: 192.168.137.104
-                    username: root
-                    password: devops123
+                    host: <% $.host %>
+                    username: <% $.username %>
+                    password: <% $.password %>
                 publish:
                     versions: <% task(get_java_version).result.result %>
                 on-success:
@@ -20,9 +25,9 @@ workflows:
             install_java:
                 action: java.install
                 input:
-                    host: 192.168.137.104
-                    username: root
-                    password: devops123
+                    host: <% $.host %>
+                    username: <% $.username %>
+                    password: <% $.password %>
                     installed_versions: <% $.versions %>
                     required_version: "java-1.8.0"
                 on-success:
@@ -30,8 +35,8 @@ workflows:
             download_file:
                 action: java.download_file
                 input:
-                    host: 192.168.137.104
-                    username: root
-                    password: devops123
+                    host: <% $.host %>
+                    username: <% $.username %>
+                    password: <% $.password %>
                     downloadURL: https://raw.githubusercontent.com/yugendra/st2-java/master/requirements.txt
                     downloadPath: /tmp/

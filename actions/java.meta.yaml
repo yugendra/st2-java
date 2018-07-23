@@ -5,3 +5,17 @@ runner_type: mistral-v2
 entry_point: workflows/java.yaml
 name: install-java
 pack: java
+parameters:
+    host:
+        type: string
+        description: Target server IP
+        required: true
+    username:
+        type: string
+        description: login username
+        required: true
+    password:
+        type: string
+        description: login password
+        secret: true
+        required: true
