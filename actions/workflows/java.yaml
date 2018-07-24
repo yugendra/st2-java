@@ -8,16 +8,12 @@ workflows:
         type: direct
         input:
             - host
-            - username
-            - password
             
         tasks:
             get_java_version:
                 action: java.get_installed
                 input:
                     host: <% $.host %>
-                    username: <% $.username %>
-                    password: <% $.password %>
                 publish:
                     versions: <% task(get_java_version).result.result %>
                 on-success:
@@ -26,8 +22,6 @@ workflows:
                 action: java.install
                 input:
                     host: <% $.host %>
-                    username: <% $.username %>
-                    password: <% $.password %>
                     installed_versions: <% $.versions %>
                     required_version: "java-1.8.0"
                 on-success:
@@ -36,7 +30,5 @@ workflows:
                 action: java.download_file
                 input:
                     host: <% $.host %>
-                    username: <% $.username %>
-                    password: <% $.password %>
                     downloadURL: https://raw.githubusercontent.com/yugendra/st2-java/master/requirements.txt
                     downloadPath: /tmp/

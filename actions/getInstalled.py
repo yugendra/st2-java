@@ -2,11 +2,11 @@ from st2common.runners.base_action import Action
 from ssh import SSH
 
 class getInstallJavaVersions(Action):
-    def run(self, host=None, username=None, password=None):
+    def run(self, host=None):
         """
         Install the JAVA
         """
-        self._conn = SSH(host=host,auth=(username, password))
+        self._conn = SSH(host=host)
         exit_status, stdout, stderr=self._conn.exec_command("rpm -qa | grep java.*openjdk | grep -v headless | sort -r")
         output = []
         for version in stdout.split():

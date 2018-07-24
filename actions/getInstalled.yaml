@@ -9,10 +9,4 @@ parameters:
   host:
     type: string
     description: Target server IP
-  username:
-    type: string
-    description: login username
-  password:
-    type: string
-    description: login password
-    secret: true
+    required: true

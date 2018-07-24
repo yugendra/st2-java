@@ -1,13 +1,14 @@
-from paramiko import SSHClient, AutoAddPolicy
+from paramiko import SSHClient, AutoAddPolicy, RSAKey
 import time
-
+from config import Config
 
 class SSH(object):
 
     def __init__(self,**kwargs):
         self._host = kwargs.pop('host')
         self._method = kwargs.pop('method', 'telnet')
-        self._auth = kwargs.pop('auth', (None, None))
+        #self._auth = kwargs.pop('auth', (None, None))
+        self._key = RSAKey.from_private_key_file(Config.key)
         self._enable = kwargs.pop('enable', None)
         self._port = kwargs.pop('port',22)
         self._client=None
@@ -17,7 +18,7 @@ class SSH(object):
         
         self.ssh = SSHClient()
         self.ssh.set_missing_host_key_policy(AutoAddPolicy())
-        self.ssh.connect(self._host, username=self._auth[0], password=self._auth[1])
+        self.ssh.connect(self._host, username=Config..usename, password=self._key)
         self.sleeptime = 0.001
         self.outdata, self.errdata = '', ''
         self.ssh_transp = self.ssh.get_transport()
