@@ -2,6 +2,7 @@
 name: "install_java"
 action_ref: "java.install-java"
 description: "Install Java on remote server"
+enabled: true
 formats:
     - display: "install java on <host>"
       representation:

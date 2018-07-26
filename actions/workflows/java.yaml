@@ -17,13 +17,23 @@ workflows:
                 publish:
                     versions: <% task(get_java_version).result.result %>
                 on-success:
+                    - copy_java_rpm
+            copy_java_rpm:
+                action: java.send_file
+                input:
+                    host: <% $.host %>
+                    source: "/var/source.rpm"
+                    destination: "/tmp"
+                publish:
+                    rpm_file: <% task(copy_java_rpm).result.result %>
+                on-success:
                     - install_java
             install_java:
-                action: java.install
+                action: java.install_local
                 input:
                     host: <% $.host %>
                     installed_versions: <% $.versions %>
-                    required_version: "java-1.8.0"
+                    rpm_file: <% $.rpm_file %>
                 on-success:
                     - download_file
             download_file:

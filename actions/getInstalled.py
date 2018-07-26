@@ -1,5 +1,5 @@
 from st2common.runners.base_action import Action
-from ssh import SSH
+from ssh_client.ssh import SSH
 
 class getInstallJavaVersions(Action):
     def run(self, host=None):
@@ -8,6 +8,7 @@ class getInstallJavaVersions(Action):
         """
         self._conn = SSH(host=host)
         exit_status, stdout, stderr=self._conn.exec_command("rpm -qa | grep java.*openjdk | grep -v headless | sort -r")
+        self._conn.close()
         output = []
         for version in stdout.split():
             output.append(version)
@@ -16,3 +17,4 @@ class getInstallJavaVersions(Action):
             return(False, stderr)
         else:
             return(True, output)
+            

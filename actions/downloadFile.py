@@ -1,5 +1,5 @@
 from st2common.runners.base_action import Action
-from ssh import SSH
+from ssh_client.ssh import SSH
 
 class downloadFile(Action):
     def run(self, host=None, downloadURL=None, downloadPath=None):
@@ -20,4 +20,5 @@ class downloadFile(Action):
         cmd = "wget " + self.downloadURL + " -P " + self.downloadPath
         _conn = SSH(host=self.host)
         exit_status, stdout, stderr=_conn.exec_command(cmd)
+        _conn.close()
         return exit_status, stderr

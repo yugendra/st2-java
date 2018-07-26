@@ -1,0 +1,20 @@
+---
+name: install_local
+pack: java
+runner_type: run-python
+description: Install Java on CentOS using local rpm
+enabled: true
+entry_point: installLocal.py
+parameters:
+    host:
+        type: string
+        description: Target server IP
+        required: true
+    installed_versions:
+        type: array
+        description: list of present java versions
+        required: true
+    rpm_file:
+        type: string
+        description: java rpm file location
+        required: true

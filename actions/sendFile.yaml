@@ -1,0 +1,20 @@
+---
+name: send_file
+pack: java
+runner_type: python-script
+description: Copy file on remote server
+enabled: true
+entry_point: sendFile.py
+parameters:
+    host:
+        type: "string"
+        description: "Target server IP"
+        required: true
+    source:
+        type: "string"
+        description: "local file location"
+        required: true
+    destination:
+        type: "string"
+        description: "Remote path where file should stored"
+        required: true
