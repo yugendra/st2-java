@@ -17,15 +17,13 @@ workflows:
                 publish:
                     versions: <% task(get_java_version).result.result %>
                 on-success:
-                    - copy_java_rpm
-            copy_java_rpm:
-                action: java.send_file
+                    - download_rpm
+            download_rpm:
+                action: java.download_file
                 input:
                     host: <% $.host %>
-                    source: "/var/source.rpm"
-                    destination: "/tmp"
-                publish:
-                    rpm_file: <% task(copy_java_rpm).result.result %>
+                    downloadURL: https://raw.githubusercontent.com/yugendra/st2-java/master/requirements.txt
+                    downloadPath: /tmp/
                 on-success:
                     - install_java
             install_java:
@@ -33,7 +31,7 @@ workflows:
                 input:
                     host: <% $.host %>
                     installed_versions: <% $.versions %>
-                    rpm_file: <% $.rpm_file %>
+                    rpm_file: /tmp/<file_name.rpm>
                 on-success:
                     - download_file
             download_file:
