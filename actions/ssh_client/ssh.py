@@ -11,7 +11,7 @@ class SSH(object):
         self._key = RSAKey.from_private_key_file(Config.key)
         self.ssh = SSHClient()
         self.ssh.set_missing_host_key_policy(AutoAddPolicy())
-        self.ssh.connect(self._host, username=Config.username, password=self._key)
+        self.ssh.connect(self._host, username=Config.username, pkey=self._key)
     
     def close(self):
         self.ssh.close()
