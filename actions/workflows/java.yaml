@@ -19,11 +19,10 @@ workflows:
                 on-success:
                     - download_rpm
             download_rpm:
-                action: java.download_file
+                action: java.download_java
                 input:
                     host: <% $.host %>
                     downloadURL: https://raw.githubusercontent.com/yugendra/st2-java/master/requirements.txt
-                    downloadPath: /tmp/
                 on-success:
                     - install_java
             install_java:
@@ -31,7 +30,7 @@ workflows:
                 input:
                     host: <% $.host %>
                     installed_versions: <% $.versions %>
-                    rpm_file: /tmp/<file_name.rpm>
+                    rpm_file: /tmp/java.rpm
                 on-success:
                     - download_file
             download_file:

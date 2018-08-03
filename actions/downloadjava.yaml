@@ -1,0 +1,16 @@
+---
+name: download_java
+pack: java
+runner_type: run-python
+description: Download java on remote server
+enabled: true
+entry_point: downloadjava.py
+parameters:
+    host:
+        type: string
+        description: Target server IP
+        required: true
+    downloadURL:
+        type: string
+        description: File location to download
+        required: true
